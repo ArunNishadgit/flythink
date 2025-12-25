@@ -1,11 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import SystemSettings from "../../dashboard/SystemSettings/page";
-import { LayoutDashboard, ShoppingBag, Users, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, Users, Settings,} from "lucide-react";
 
 // 👇 IMPORTANT: Links ko URL ke hisaab se update kiya hai
 const sidebarLinks = [
@@ -38,9 +38,15 @@ export default function SidebarWrapper() {
     <aside className="hidden lg:flex h-screen w-64 flex-col fixed left-0 top-0 border-r bg-gray-100/40 dark:bg-gray-800/40 z-40">
 
       {/* Logo Area */}
-      <div className="flex h-16 items-center border-b px-6">
+      <div className="flex h-16 items-center  px-6 py-12">
         <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
-          <span className="text-xl font-bold">FlyThink Admin</span>
+          <Image
+            src="/Flythink_logo.png"
+            alt="Admin Logo"
+            width={200}
+            height={50}
+            className="object-contain"
+          />
         </Link>
       </div>
 

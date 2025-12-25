@@ -55,12 +55,31 @@ export default function HeaderWrapper() {
   // 👇 FIXED LOGIC: Ab ye sirf main shabd check karega (admin/dashboard ka confusion nahi hoga)
   const getPageTitle = (path: string) => {
     if (path.includes("/orders")) return "Orders";
-    if (path.includes("/customers")) return "Customers";
-    if (path.includes("/settings")) return "Settings";
+    if (path.includes("/Customers")) return "Customers";
+    if (path.includes("/Settings")) return "Settings";
+    if (path.includes("/Products")) return "Products";
+    if (path.includes("/Inventory")) return "Inventory";
+    if (path.includes("/MediaLibrary")) return "Media Library";
+    if (path.includes("/CMSBlogs")) return "CMS Blogs";
+    if (path.includes("/Payments")) return "Payments";
+    if (path.includes("/Marketing")) return "Marketing";
+    if (path.includes("/GSTInvoice")) return "GST Invoice";
+    if (path.includes("/LogsActivity")) return "Logs Activity";
+    if (path.includes("/Notifications")) return "Notifications";
+    if (path.includes("/ReportsAnalytics")) return "Reports & Analytics";
+    if (path.includes("/Support")) return "Support";
+    if (path.includes("/BackupRestore")) return "Backup & Restore";
+    if (path.includes("/SystemSettings")) return "SystemSettings";
     if (path === "/dashboard" || path.includes("/dashboard")) return "Dashboard";
 
-    return "Admin Panel"; // Agar kuch match na ho
+    return "dashboard"; // Agar kuch match na ho
   };
+
+
+
+
+
+
 
   const currentTitle = getPageTitle(pathname);
 
