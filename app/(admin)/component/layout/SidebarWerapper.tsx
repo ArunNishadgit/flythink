@@ -4,22 +4,39 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import SystemSettings from "../../dashboard/SystemSettings/page";
 import { LayoutDashboard, ShoppingBag, Users, Settings, LogOut } from "lucide-react";
 
 // 👇 IMPORTANT: Links ko URL ke hisaab se update kiya hai
 const sidebarLinks = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Products", href: "/dashboard/Products", icon: Settings },
   { name: "Orders", href: "/dashboard/orders", icon: ShoppingBag },
-  { name: "Customers", href: "/dashboard/customers", icon: Users },
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
+  { name: "Inventory", href: "/dashboard/Inventory", icon: Settings },
+  { name: "Customers", href: "/dashboard/Customers", icon: Users },
+  { name: "MediaLibrary", href: "/dashboard/MediaLibrary", icon: Users },
+  { name: "CMS Blogs", href: "/dashboard/CMSBlogs", icon: Settings },
+  { name: "Payments", href: "/dashboard/Payments", icon: Settings },
+  { name: "marketing", href: "/dashboard/Marketing", icon: Settings },
+  { name: "GSTInvoice", href: "/dashboard/GSTInvoice", icon: Settings },
+  { name: "LogsActivity", href: "/dashboard/LogsActivity", icon: Settings },
+  { name: "Notifications", href: "/dashboard/Notifications", icon: Settings },
+  { name: "ReportsAnalytics", href: "/dashboard/ReportsAnalytics", icon: Settings },
+  { name: "Support", href: "/dashboard/Support", icon: Settings },
+  { name: "Backup & Restore", href: "/dashboard/BackupRestore", icon: Users },
 ];
+
+
+
+
+
 
 export default function SidebarWrapper() {
   const pathname = usePathname();
 
   return (
     <aside className="hidden lg:flex h-screen w-64 flex-col fixed left-0 top-0 border-r bg-gray-100/40 dark:bg-gray-800/40 z-40">
-      
+
       {/* Logo Area */}
       <div className="flex h-16 items-center border-b px-6">
         <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
@@ -33,7 +50,7 @@ export default function SidebarWrapper() {
           {sidebarLinks.map((link) => {
             // Check agar URL match karta hai toh highlight karein
             const isActive = pathname === link.href;
-            
+
             return (
               <Link
                 key={link.href}
@@ -53,13 +70,22 @@ export default function SidebarWrapper() {
         </nav>
       </div>
 
-      {/* Bottom Actions */}
+      {/* admin action buttons */}
       <div className="mt-auto p-4 border-t">
-        <Button variant="ghost" className="w-full justify-start gap-2 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20">
-          <LogOut className="h-4 w-4" />
-          Logout
-        </Button>
-      </div>
+  <Button
+    asChild
+    variant="ghost"
+    className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
+  >
+    <Link
+      href="/dashboard/SystemSettings"
+      className="flex items-center gap-2"
+    >
+      <Settings className="h-4 w-4" />
+      <span>SystemSettings</span>
+    </Link>
+  </Button>
+</div>
     </aside>
   );
 }

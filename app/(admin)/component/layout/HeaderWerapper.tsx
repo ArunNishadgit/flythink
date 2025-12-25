@@ -17,14 +17,36 @@ import {
 import { Input } from "@/components/ui/input";
 import { Bell, Search, Menu, LayoutDashboard, ShoppingBag, Users, Settings } from "lucide-react";
 import { useState } from "react";
+import { ModeToggle } from "../ModeToggle";
+
+
+
+
 
 // NOTE: Links ko aapke actual URL pattern ke hisaab se update kar diya hai
 const sidebarLinks = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Products", href: "/dashboard/Products", icon: Settings },
   { name: "Orders", href: "/dashboard/orders", icon: ShoppingBag },
-  { name: "Customers", href: "/dashboard/customers", icon: Users },
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
+  { name: "Inventory", href: "/dashboard/Inventory", icon: Settings },
+  { name: "Customers", href: "/dashboard/Customers", icon: Users },
+  { name: "MediaLibrary", href: "/dashboard/MediaLibrary", icon: Users },
+  { name: "CMS Blogs", href: "/dashboard/CMSBlogs", icon: Settings },
+  { name: "Payments", href: "/dashboard/Payments", icon: Settings },
+  { name: "marketing", href: "/dashboard/Marketing", icon: Settings },
+  { name: "GSTInvoice", href: "/dashboard/GSTInvoice", icon: Settings },
+  { name: "LogsActivity", href: "/dashboard/LogsActivity", icon: Settings },
+  { name: "Notifications", href: "/dashboard/Notifications", icon: Settings },
+  { name: "ReportsAnalytics", href: "/dashboard/ReportsAnalytics", icon: Settings },
+  { name: "Support", href: "/dashboard/Support", icon: Settings },
+  { name: "Backup & Restore", href: "/dashboard/BackupRestore", icon: Users },
 ];
+
+
+
+
+
+
 
 export default function HeaderWrapper() {
   const pathname = usePathname();
@@ -35,8 +57,8 @@ export default function HeaderWrapper() {
     if (path.includes("/orders")) return "Orders";
     if (path.includes("/customers")) return "Customers";
     if (path.includes("/settings")) return "Settings";
-    if (path === "/dashboard" || path.includes("/dashboard")) return "Dashboard"; 
-    
+    if (path === "/dashboard" || path.includes("/dashboard")) return "Dashboard";
+
     return "Admin Panel"; // Agar kuch match na ho
   };
 
@@ -44,7 +66,7 @@ export default function HeaderWrapper() {
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6 shadow-sm">
-      
+
       {/* Mobile Toggle Button */}
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
@@ -61,8 +83,8 @@ export default function HeaderWrapper() {
           </div>
           <nav className="grid gap-2 text-lg font-medium p-4">
             {sidebarLinks.map((link) => {
-               const isActive = pathname === link.href;
-               return (
+              const isActive = pathname === link.href;
+              return (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -95,6 +117,8 @@ export default function HeaderWrapper() {
         <Button variant="ghost" size="icon" className="rounded-full">
           <Bell className="h-5 w-5" />
         </Button>
+
+        <ModeToggle />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-9 w-9 rounded-full">
