@@ -15,7 +15,25 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Bell, Search, Menu, LayoutDashboard, ShoppingBag, Users, Settings } from "lucide-react";
+import { 
+  Bell, 
+  Search, 
+  Menu, 
+  LayoutDashboard, 
+  IndianRupee, 
+  Logs, 
+  LibraryBig, 
+  ShoppingBag, 
+  Users,  
+  FolderKanban, 
+  CirclePile, 
+  SquarePercent, 
+  Newspaper, 
+  Activity, 
+  Megaphone, 
+  MessageCircleWarning, 
+  HandFist, 
+  CloudBackup} from "lucide-react";
 import { useState } from "react";
 import { ModeToggle } from "../ModeToggle";
 
@@ -26,20 +44,20 @@ import { ModeToggle } from "../ModeToggle";
 // NOTE: Links ko aapke actual URL pattern ke hisaab se update kar diya hai
 const sidebarLinks = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Products", href: "/dashboard/Products", icon: Settings },
+  { name: "Products", href: "/dashboard/Products", icon: FolderKanban },
   { name: "Orders", href: "/dashboard/orders", icon: ShoppingBag },
-  { name: "Inventory", href: "/dashboard/Inventory", icon: Settings },
+  { name: "Inventory", href: "/dashboard/Inventory", icon: CirclePile },
   { name: "Customers", href: "/dashboard/Customers", icon: Users },
-  { name: "MediaLibrary", href: "/dashboard/MediaLibrary", icon: Users },
-  { name: "CMS Blogs", href: "/dashboard/CMSBlogs", icon: Settings },
-  { name: "Payments", href: "/dashboard/Payments", icon: Settings },
-  { name: "marketing", href: "/dashboard/Marketing", icon: Settings },
-  { name: "GSTInvoice", href: "/dashboard/GSTInvoice", icon: Settings },
-  { name: "LogsActivity", href: "/dashboard/LogsActivity", icon: Settings },
-  { name: "Notifications", href: "/dashboard/Notifications", icon: Settings },
-  { name: "ReportsAnalytics", href: "/dashboard/ReportsAnalytics", icon: Settings },
-  { name: "Support", href: "/dashboard/Support", icon: Settings },
-  { name: "Backup & Restore", href: "/dashboard/BackupRestore", icon: Users },
+  { name: "MediaLibrary", href: "/dashboard/MediaLibrary", icon: LibraryBig },
+  { name: "CMS Blogs", href: "/dashboard/CMSBlogs", icon: Logs },
+  { name: "Payments", href: "/dashboard/Payments", icon: IndianRupee },
+  { name: "marketing", href: "/dashboard/Marketing", icon: SquarePercent },
+  { name: "GSTInvoice", href: "/dashboard/GSTInvoice", icon: Newspaper },
+  { name: "LogsActivity", href: "/dashboard/LogsActivity", icon: Activity },
+  { name: "Notifications", href: "/dashboard/Notifications", icon: Megaphone },
+  { name: "ReportsAnalytics", href: "/dashboard/ReportsAnalytics", icon: MessageCircleWarning },
+  { name: "Support", href: "/dashboard/Support", icon: HandFist },
+  { name: "Backup & Restore", href: "/dashboard/BackupRestore", icon: CloudBackup },
 ];
 
 

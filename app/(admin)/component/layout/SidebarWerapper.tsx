@@ -5,25 +5,46 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, ShoppingBag, Users, Settings,} from "lucide-react";
+import {
+  LayoutDashboard,
+  IndianRupee,
+  Logs,
+  LibraryBig,
+  ShoppingBag,
+  Users,
+  Settings,
+  FolderKanban,
+  CirclePile,
+  SquarePercent,
+  Newspaper,
+  Activity,
+  Megaphone,
+  MessageCircleWarning,
+  HandFist,
+  CloudBackup
+} from "lucide-react";
+
+
+
+
 
 // 👇 IMPORTANT: Links ko URL ke hisaab se update kiya hai
 const sidebarLinks = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Products", href: "/dashboard/Products", icon: Settings },
+  { name: "Products", href: "/dashboard/Products", icon: FolderKanban },
   { name: "Orders", href: "/dashboard/orders", icon: ShoppingBag },
-  { name: "Inventory", href: "/dashboard/Inventory", icon: Settings },
+  { name: "Inventory", href: "/dashboard/Inventory", icon: CirclePile },
   { name: "Customers", href: "/dashboard/Customers", icon: Users },
-  { name: "MediaLibrary", href: "/dashboard/MediaLibrary", icon: Users },
-  { name: "CMS Blogs", href: "/dashboard/CMSBlogs", icon: Settings },
-  { name: "Payments", href: "/dashboard/Payments", icon: Settings },
-  { name: "marketing", href: "/dashboard/Marketing", icon: Settings },
-  { name: "GSTInvoice", href: "/dashboard/GSTInvoice", icon: Settings },
-  { name: "LogsActivity", href: "/dashboard/LogsActivity", icon: Settings },
-  { name: "Notifications", href: "/dashboard/Notifications", icon: Settings },
-  { name: "ReportsAnalytics", href: "/dashboard/ReportsAnalytics", icon: Settings },
-  { name: "Support", href: "/dashboard/Support", icon: Settings },
-  { name: "Backup & Restore", href: "/dashboard/BackupRestore", icon: Users },
+  { name: "MediaLibrary", href: "/dashboard/MediaLibrary", icon: LibraryBig },
+  { name: "CMS Blogs", href: "/dashboard/CMSBlogs", icon: Logs },
+  { name: "Payments", href: "/dashboard/Payments", icon: IndianRupee },
+  { name: "marketing", href: "/dashboard/Marketing", icon: SquarePercent },
+  { name: "GSTInvoice", href: "/dashboard/GSTInvoice", icon: Newspaper },
+  { name: "LogsActivity", href: "/dashboard/LogsActivity", icon: Activity },
+  { name: "Notifications", href: "/dashboard/Notifications", icon: Megaphone },
+  { name: "ReportsAnalytics", href: "/dashboard/ReportsAnalytics", icon: MessageCircleWarning },
+  { name: "Support", href: "/dashboard/Support", icon: HandFist },
+  { name: "Backup & Restore", href: "/dashboard/BackupRestore", icon: CloudBackup },
 ];
 
 
@@ -52,11 +73,9 @@ export default function SidebarWrapper() {
 
       {/* Navigation Links */}
       <div className="flex-1 overflow-auto py-4">
-        <nav className="grid items-start px-4 text-sm font-medium">
+        <nav className="grid items-start px-4 text-m font-medium">
           {sidebarLinks.map((link) => {
-            // Check agar URL match karta hai toh highlight karein
             const isActive = pathname === link.href;
-
             return (
               <Link
                 key={link.href}
@@ -78,20 +97,20 @@ export default function SidebarWrapper() {
 
       {/* admin action buttons */}
       <div className="mt-auto p-4 border-t">
-  <Button
-    asChild
-    variant="ghost"
-    className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
-  >
-    <Link
-      href="/dashboard/SystemSettings"
-      className="flex items-center gap-2"
-    >
-      <Settings className="h-4 w-4" />
-      <span>SystemSettings</span>
-    </Link>
-  </Button>
-</div>
+        <Button
+          asChild
+          variant="ghost"
+          className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20"
+        >
+          <Link
+            href="/dashboard/SystemSettings"
+            className="flex items-center gap-2"
+          >
+            <Settings className="h-4 w-4" />
+            <span>SystemSettings</span>
+          </Link>
+        </Button>
+      </div>
     </aside>
   );
 }
