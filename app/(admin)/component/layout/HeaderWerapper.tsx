@@ -1,5 +1,6 @@
 "use client";
 
+import { SidebarTrigger } from "@/components/ui/sidebar"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -139,7 +140,11 @@ export default function HeaderWrapper() {
           </nav>
         </SheetContent>
       </Sheet>
+       {/* sidebarwrepp icon */}
 
+       <div>
+        <SidebarTrigger className="mr-2" />
+       </div>
       {/* 👇 DYNAMIC TITLE DISPLAY */}
       <div className="flex items-center gap-2">
         <h1 className="text-lg font-semibold md:text-xl">{currentTitle}</h1>
