@@ -1,12 +1,10 @@
 "use client";
 
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { 
   Bell, 
   Search, 
-  Menu, 
+ 
   LayoutDashboard, 
   IndianRupee, 
   Logs, 
@@ -105,41 +103,7 @@ export default function HeaderWrapper() {
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-6 shadow-sm">
 
-      {/* Mobile Toggle Button */}
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="lg:hidden shrink-0">
-            <Menu className="h-5 w-5" />
-            <span className="sr-only">Toggle navigation menu</span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="flex flex-col w-64 p-0">
-          <div className="flex h-16 items-center border-b px-6">
-            <Link href="#" className="flex items-center gap-2 font-semibold">
-              <span>FlyThink Admin</span>
-            </Link>
-          </div>
-          <nav className="grid gap-2 text-lg font-medium p-4">
-            {sidebarLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground",
-                    isActive ? "bg-muted text-foreground" : "text-muted-foreground"
-                  )}
-                >
-                  <link.icon className="h-5 w-5" />
-                  {link.name}
-                </Link>
-              )
-            })}
-          </nav>
-        </SheetContent>
-      </Sheet>
+      
        {/* sidebarwrepp icon */}
 
        <div>

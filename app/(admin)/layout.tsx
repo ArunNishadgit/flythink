@@ -1,7 +1,7 @@
 import { ThemeProvider } from "./theme-provider";
 import HeaderWerapper from "./component/layout/HeaderWerapper";
 import { AppSidebar } from "./component/layout/AppSidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function deshbordLayout({
   children,
@@ -16,18 +16,10 @@ export default function deshbordLayout({
       disableTransitionOnChange
     >
       <SidebarProvider>
-        <div className="flex min-h-screen w-full bg-gray-50/50 dark:bg-gray-900/50">
-          
-          {/* Sidebar */}
+        <div className="flex min-h-screen w-full bg-gray-50/50 dark:bg-gray-900/50">         
           <AppSidebar />
-
-          {/* Main Content */}
-          <div className="flex flex-1 flex-col">
-            
-            {/* Header */}
+          <div className="flex flex-1 flex-col">          
             <HeaderWerapper />
-
-            {/* Page Content */}
             <main className="flex-1 p-4 lg:p-6">
               {children}
             </main>
