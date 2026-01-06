@@ -2,7 +2,6 @@
 
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {

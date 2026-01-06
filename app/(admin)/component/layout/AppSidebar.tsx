@@ -58,7 +58,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className="border-r">
 
       {/* 🔷 LOGO / HEADER */}
-      <SidebarHeader className="h-16 flex items-center px-4">
+      <SidebarHeader className="h-18 flex items-center px-4 mb-4">
         <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
           <Image
             src="/Flythink_logo.png"
@@ -81,11 +81,11 @@ export function AppSidebar() {
                   <Link
                     href={link.href}
                     className={cn(
-                      "flex items-center gap-3",
-                      isActive && "font-semibold"
+                      "flex items-center gap-5",
+                      isActive && "text-lg"
                     )}
                   >
-                    <link.icon className="h-4 w-4" />
+                    <link.icon className="h-6 w-6" />
                     <span>{link.name}</span>
                   </Link>
                 </SidebarMenuButton>
@@ -104,7 +104,7 @@ export function AppSidebar() {
         >
           <Link href="/dashboard/SystemSettings" className="flex items-center gap-2">
             <Settings className="h-4 w-4" />
-            <span>System Settings</span>
+            <span>System</span>
           </Link>
         </Button>
       </SidebarFooter>
