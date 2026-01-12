@@ -1,7 +1,8 @@
 "use client";
 
+
 import React, { useState, useEffect } from 'react';
-import { Plus, Edit2, Trash2, ChevronDown, ChevronRight, Search, Package, FolderTree, Eye, EyeOff } from 'lucide-react';
+import { Plus, Edit2, Trash2, ChevronDown, ChevronRight, Search, Package, FolderTree } from 'lucide-react';
 
 interface CategoryCount {
   products: number;
@@ -50,8 +51,8 @@ export default function CategoriesPage() {
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
-  const [isDark, setIsDark] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
+
   const [formData, setFormData] = useState<CategoryFormData>({
     name: '',
     description: '',
@@ -204,29 +205,21 @@ export default function CategoriesPage() {
     return (
       <React.Fragment key={category.id}>
         <div 
-          className={`flex items-center gap-3 p-4 border-b transition-colors ${
-            isDark 
-              ? 'border-gray-800 hover:bg-gray-800/50' 
-              : 'border-gray-200 hover:bg-gray-50'
-          }`}
+          className="flex items-center gap-3 p-4 border-b border-gray-200 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/50 transition-colors"
           style={{ paddingLeft: `${level * 2 + 1}rem` }}
         >
           <div className="flex items-center gap-2 flex-1 min-w-0">
             {hasChildren && (
               <button
                 onClick={() => toggleExpand(category.id)}
-                className={`p-1 rounded hover:bg-gray-700/50 transition-colors ${
-                  isDark ? 'text-gray-400' : 'text-gray-500'
-                }`}
+                className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
               >
                 {isExpanded ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
               </button>
             )}
             {!hasChildren && <div className="w-7" />}
             
-            <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-              isDark ? 'bg-gradient-to-br from-purple-600 to-blue-600' : 'bg-gradient-to-br from-purple-400 to-blue-400'
-            }`}>
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-br from-purple-400 to-blue-400">
               {category.image ? (
                 <img src={category.image} alt={category.name} className="w-full h-full object-cover rounded-lg" />
               ) : (
@@ -236,17 +229,17 @@ export default function CategoriesPage() {
 
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
-                <h3 className={`font-semibold truncate ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <h3 className="font-semibold truncate text-gray-900 dark:text-white">
                   {category.name}
                 </h3>
                 {!category.isActive && (
-                  <span className="px-2 py-0.5 text-xs rounded-full bg-red-500/20 text-red-400">
+                  <span className="px-2 py-0.5 text-xs rounded-full bg-red-100 text-red-600 dark:bg-red-500/20 dark:text-red-400">
                     Inactive
                   </span>
                 )}
               </div>
               {category.description && (
-                <p className={`text-sm truncate ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                <p className="text-sm truncate text-gray-600 dark:text-gray-400">
                   {category.description}
                 </p>
               )}
@@ -254,17 +247,17 @@ export default function CategoriesPage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-500/10">
-              <Package size={16} className="text-blue-400" />
-              <span className={`text-sm font-medium ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-100 dark:bg-blue-500/10">
+              <Package size={16} className="text-blue-600 dark:text-blue-400" />
+              <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
                 {category._count?.products || 0}
               </span>
             </div>
 
             {hasChildren && (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-purple-500/10">
-                <FolderTree size={16} className="text-purple-400" />
-                <span className={`text-sm font-medium ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-purple-100 dark:bg-purple-500/10">
+                <FolderTree size={16} className="text-purple-600 dark:text-purple-400" />
+                <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
                   {category._count?.children || 0}
                 </span>
               </div>
@@ -273,21 +266,13 @@ export default function CategoriesPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => openModal(category)}
-                className={`p-2 rounded-lg transition-colors ${
-                  isDark 
-                    ? 'hover:bg-blue-500/20 text-blue-400' 
-                    : 'hover:bg-blue-100 text-blue-600'
-                }`}
+                className="p-2 rounded-lg hover:bg-blue-100 text-blue-600 dark:hover:bg-blue-500/20 dark:text-blue-400"
               >
                 <Edit2 size={18} />
               </button>
               <button
                 onClick={() => handleDelete(category.id)}
-                className={`p-2 rounded-lg transition-colors ${
-                  isDark 
-                    ? 'hover:bg-red-500/20 text-red-400' 
-                    : 'hover:bg-red-100 text-red-600'
-                }`}
+                className="p-2 rounded-lg hover:bg-red-100 text-red-600 dark:hover:bg-red-500/20 dark:text-red-400"
               >
                 <Trash2 size={18} />
               </button>
@@ -305,31 +290,19 @@ export default function CategoriesPage() {
   const categoryTree = buildCategoryTree(filteredCategories);
 
   return (
-    <div className={`min-h-screen transition-colors ${
-      isDark ? 'bg-gray-950' : 'bg-gray-50'
-    }`}>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors">
       <div className="max-w-7xl mx-auto p-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className={`text-3xl font-bold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">
               Categories Management
             </h1>
-            <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
+            <p className="text-gray-600 dark:text-gray-400">
               Manage your product categories and subcategories
             </p>
           </div>
           
           <div className="flex gap-3">
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className={`px-4 py-2 rounded-lg transition-colors ${
-                isDark 
-                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' 
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
-              }`}
-            >
-              {isDark ? <Eye size={20} /> : <EyeOff size={20} />}
-            </button>
             <button
               onClick={() => openModal()}
               className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all flex items-center gap-2 font-medium"
@@ -341,54 +314,42 @@ export default function CategoriesPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className={`p-6 rounded-xl border ${
-            isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'
-          }`}>
+          <div className="p-6 rounded-xl border bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-800">
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-lg bg-gradient-to-br from-purple-600 to-blue-600">
                 <FolderTree className="text-white" size={24} />
               </div>
               <div>
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Total Categories
-                </p>
-                <p className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Total Categories</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {categories.length}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className={`p-6 rounded-xl border ${
-            isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'
-          }`}>
+          <div className="p-6 rounded-xl border bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-800">
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600">
-                <Eye className="text-white" size={24} />
+                <FolderTree className="text-white" size={24} />
               </div>
               <div>
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Active
-                </p>
-                <p className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Active</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {categories.filter(c => c.isActive).length}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className={`p-6 rounded-xl border ${
-            isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'
-          }`}>
+          <div className="p-6 rounded-xl border bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-800">
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-lg bg-gradient-to-br from-orange-600 to-red-600">
                 <Package className="text-white" size={24} />
               </div>
               <div>
-                <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Total Products
-                </p>
-                <p className={`text-2xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Total Products</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {categories.reduce((sum, cat) => sum + (cat._count?.products || 0), 0)}
                 </p>
               </div>
@@ -398,39 +359,27 @@ export default function CategoriesPage() {
 
         <div className="mb-6">
           <div className="relative">
-            <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 ${
-              isDark ? 'text-gray-500' : 'text-gray-400'
-            }`} size={20} />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" size={20} />
             <input
               type="text"
               placeholder="Search categories..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={`w-full pl-12 pr-4 py-3 rounded-xl border transition-colors ${
-                isDark 
-                  ? 'bg-gray-900 border-gray-800 text-white placeholder-gray-500 focus:border-purple-500' 
-                  : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-purple-500'
-              } outline-none`}
+              className="w-full pl-12 pr-4 py-3 rounded-xl border bg-white border-gray-300 text-gray-900 placeholder-gray-400 dark:bg-gray-900 dark:border-gray-800 dark:text-white dark:placeholder-gray-500 outline-none focus:border-purple-500"
             />
           </div>
         </div>
 
-        <div className={`rounded-xl border overflow-hidden ${
-          isDark ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'
-        }`}>
+        <div className="rounded-xl border bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-800 overflow-hidden">
           {loading ? (
-            <div className="p-12 text-center">
-              <div className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                Loading categories...
-              </div>
+            <div className="p-12 text-center text-gray-600 dark:text-gray-400">
+              Loading categories...
             </div>
           ) : categoryTree.length === 0 ? (
             <div className="p-12 text-center">
-              <FolderTree className={`mx-auto mb-4 ${isDark ? 'text-gray-700' : 'text-gray-300'}`} size={48} />
-              <div className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                No categories found
-              </div>
-              <p className={`text-sm mt-2 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+              <FolderTree className="mx-auto mb-4 text-gray-300 dark:text-gray-700" size={48} />
+              <div className="text-lg text-gray-600 dark:text-gray-400">No categories found</div>
+              <p className="text-sm mt-2 text-gray-500">
                 Create your first category to get started
               </p>
             </div>
@@ -445,18 +394,16 @@ export default function CategoriesPage() {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" onClick={closeModal}>
           <div 
-            className={`w-full max-w-md rounded-xl p-6 ${isDark ? 'bg-gray-900' : 'bg-white'}`}
+            className="w-full max-w-md rounded-xl p-6 bg-white dark:bg-gray-900"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
               {editingCategory ? 'Edit Category' : 'Add New Category'}
             </h2>
 
             <div className="space-y-4">
               <div>
-                <label className={`block text-sm font-medium mb-2 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
+                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                   Category Name *
                 </label>
                 <input
@@ -464,46 +411,30 @@ export default function CategoriesPage() {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className={`w-full px-4 py-2 rounded-lg border transition-colors ${
-                    isDark 
-                      ? 'bg-gray-800 border-gray-700 text-white' 
-                      : 'bg-white border-gray-300 text-gray-900'
-                  } outline-none focus:border-purple-500`}
+                  className="w-full px-4 py-2 rounded-lg border bg-white border-gray-300 text-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-white outline-none focus:border-purple-500"
                 />
               </div>
 
               <div>
-                <label className={`block text-sm font-medium mb-2 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
+                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                   Description
                 </label>
                 <textarea
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
-                  className={`w-full px-4 py-2 rounded-lg border transition-colors resize-none ${
-                    isDark 
-                      ? 'bg-gray-800 border-gray-700 text-white' 
-                      : 'bg-white border-gray-300 text-gray-900'
-                  } outline-none focus:border-purple-500`}
+                  className="w-full px-4 py-2 rounded-lg border resize-none bg-white border-gray-300 text-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-white outline-none focus:border-purple-500"
                   rows={3}
                 />
               </div>
 
               <div>
-                <label className={`block text-sm font-medium mb-2 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
+                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                   Parent Category
                 </label>
                 <select
                   value={formData.parentId}
                   onChange={(e) => setFormData({...formData, parentId: e.target.value})}
-                  className={`w-full px-4 py-2 rounded-lg border transition-colors ${
-                    isDark 
-                      ? 'bg-gray-800 border-gray-700 text-white' 
-                      : 'bg-white border-gray-300 text-gray-900'
-                  } outline-none focus:border-purple-500`}
+                  className="w-full px-4 py-2 rounded-lg border bg-white border-gray-300 text-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-white outline-none focus:border-purple-500"
                 >
                   <option value="">No Parent (Root Category)</option>
                   {categories
@@ -517,20 +448,14 @@ export default function CategoriesPage() {
               </div>
 
               <div>
-                <label className={`block text-sm font-medium mb-2 ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
+                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
                   Image URL
                 </label>
                 <input
                   type="url"
                   value={formData.image}
                   onChange={(e) => setFormData({...formData, image: e.target.value})}
-                  className={`w-full px-4 py-2 rounded-lg border transition-colors ${
-                    isDark 
-                      ? 'bg-gray-800 border-gray-700 text-white' 
-                      : 'bg-white border-gray-300 text-gray-900'
-                  } outline-none focus:border-purple-500`}
+                  className="w-full px-4 py-2 rounded-lg border bg-white border-gray-300 text-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-white outline-none focus:border-purple-500"
                 />
               </div>
 
@@ -542,9 +467,7 @@ export default function CategoriesPage() {
                   onChange={(e) => setFormData({...formData, isActive: e.target.checked})}
                   className="w-4 h-4 rounded"
                 />
-                <label htmlFor="isActive" className={`text-sm font-medium ${
-                  isDark ? 'text-gray-300' : 'text-gray-700'
-                }`}>
+                <label htmlFor="isActive" className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Active
                 </label>
               </div>
@@ -552,17 +475,13 @@ export default function CategoriesPage() {
               <div className="flex gap-3 pt-4">
                 <button
                   onClick={closeModal}
-                  className={`flex-1 px-4 py-2 rounded-lg transition-colors ${
-                    isDark 
-                      ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' 
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
+                  className="flex-1 px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSubmit}
-                  className="flex-1 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all font-medium"
+                  className="flex-1 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 font-medium"
                 >
                   {editingCategory ? 'Update' : 'Create'}
                 </button>
