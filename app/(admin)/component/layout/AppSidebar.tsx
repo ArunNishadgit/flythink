@@ -36,6 +36,7 @@ import {
 const sidebarLinks = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Products", href: "/dashboard/Products", icon: FolderKanban },
+  { name: "Categories", href: "/dashboard/Categories", icon: Newspaper},
   { name: "Orders", href: "/dashboard/orders", icon: ShoppingBag },
   { name: "Inventory", href: "/dashboard/Inventory", icon: CirclePile },
   { name: "Customers", href: "/dashboard/Customers", icon: Users },

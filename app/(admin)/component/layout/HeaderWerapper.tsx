@@ -56,6 +56,7 @@ const sidebarLinks = [
   { name: "ReportsAnalytics", href: "/dashboard/ReportsAnalytics", icon: MessageCircleWarning },
   { name: "Support", href: "/dashboard/Support", icon: HandFist },
   { name: "Backup & Restore", href: "/dashboard/BackupRestore", icon: CloudBackup },
+  { name: "Categories", href: "/dashboard/Categories", icon: Newspaper},
 ];
 
 
@@ -86,6 +87,7 @@ export default function HeaderWrapper() {
     if (path.includes("/Support")) return "Support";
     if (path.includes("/BackupRestore")) return "Backup & Restore";
     if (path.includes("/SystemSettings")) return "SystemSettings";
+    if (path.includes("/Categories")) return "Categories"
     if (path === "/dashboard" || path.includes("/dashboard")) return "Dashboard";
 
     return "dashboard"; // Agar kuch match na ho
