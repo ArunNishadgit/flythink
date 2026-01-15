@@ -1,6 +1,15 @@
 "use client";
+
 import { useState, useMemo } from "react";
-import { Search, Plus, Eye, Pencil, Trash2, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Search,
+  Plus,
+  Eye,
+  Pencil,
+  Trash2,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 type BlogStatus = "Published" | "Draft";
 
@@ -16,9 +25,9 @@ type Blog = {
 };
 
 const BlogsPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [entriesPerPage, setEntriesPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [entriesPerPage, setEntriesPerPage] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [blogs, setBlogs] = useState<Blog[]>([
     {
@@ -73,9 +82,10 @@ const BlogsPage = () => {
     },
   ]);
 
-  // 🔍 Search
+  // 🔍 Search Filter
   const filteredBlogs = useMemo(() => {
     if (!searchTerm) return blogs;
+
     return blogs.filter(
       (b) =>
         b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -84,17 +94,19 @@ const BlogsPage = () => {
     );
   }, [searchTerm, blogs]);
 
-  // 📄 Pagination
-  const totalPages = Math.ceil(filteredBlogs.length / entriesPerPage);
+  // 📄 Pagination Logic
+  const totalPages = Math.ceil(filteredBlogs.length / entriesPerPage) || 1;
   const startIndex = (currentPage - 1) * entriesPerPage;
   const endIndex = startIndex + entriesPerPage;
   const currentBlogs = filteredBlogs.slice(startIndex, endIndex);
 
   const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) setCurrentPage(page);
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
-  // 🎨 Status Badge
+  // 🎨 Status Badge Style
   const statusStyle = (status: BlogStatus) => {
     switch (status) {
       case "Published":
@@ -106,7 +118,7 @@ const BlogsPage = () => {
     }
   };
 
-  // 🔁 Status Change
+  // 🔁 Change Blog Status
   const handleStatusChange = (id: string, newStatus: BlogStatus) => {
     setBlogs((prev) =>
       prev.map((blog) =>
@@ -115,9 +127,11 @@ const BlogsPage = () => {
     );
   };
 
-  // 🗑 Delete
+  // 🗑 Delete Blog
   const handleDelete = (id: string) => {
-    if (!confirm("Are you sure you want to delete this blog?")) return;
+    const confirmed = window.confirm("Are you sure you want to delete this blog?");
+    if (!confirmed) return;
+
     setBlogs((prev) => prev.filter((blog) => blog.id !== id));
   };
 
@@ -159,7 +173,9 @@ const BlogsPage = () => {
             <option value={25}>25</option>
             <option value={50}>50</option>
           </select>
-          <span className="text-sm text-zinc-600 dark:text-zinc-400">entries</span>
+          <span className="text-sm text-zinc-600 dark:text-zinc-400">
+            entries
+          </span>
         </div>
 
         <div className="relative w-72">
@@ -199,61 +215,76 @@ const BlogsPage = () => {
           </thead>
 
           <tbody>
-            {currentBlogs.map((blog) => (
-              <tr
-                key={blog.id}
-                className="border-t
-                  border-gray-200 hover:bg-gray-100
-                  dark:border-zinc-800 dark:hover:bg-zinc-800/50"
-              >
-                <td className="px-4 py-3 font-medium">{blog.title}</td>
-                <td className="px-4 py-3">{blog.author}</td>
-                <td className="px-4 py-3">{blog.category}</td>
-                <td className="px-4 py-3">{blog.createdAt}</td>
-                <td className="px-4 py-3">{blog.views}</td>
+            {currentBlogs.length > 0 ? (
+              currentBlogs.map((blog) => (
+                <tr
+                  key={blog.id}
+                  className="border-t
+                    border-gray-200 hover:bg-gray-100
+                    dark:border-zinc-800 dark:hover:bg-zinc-800/50"
+                >
+                  <td className="px-4 py-3 font-medium">{blog.title}</td>
+                  <td className="px-4 py-3">{blog.author}</td>
+                  <td className="px-4 py-3">{blog.category}</td>
+                  <td className="px-4 py-3">{blog.createdAt}</td>
+                  <td className="px-4 py-3">{blog.views}</td>
 
-                {/* Status */}
-                <td className="px-4 py-3">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${statusStyle(
-                      blog.status
-                    )}`}
-                  >
-                    {blog.status}
-                  </span>
-                </td>
-
-                {/* Actions */}
-                <td className="px-4 py-3">
-                  <div className="flex items-center gap-2">
-                    <button title="View">
-                      <Eye className="w-4 h-4 text-zinc-500 hover:text-white" />
-                    </button>
-                    <button title="Edit">
-                      <Pencil className="w-4 h-4 text-green-500" />
-                    </button>
-                    <button title="Delete" onClick={() => handleDelete(blog.id)}>
-                      <Trash2 className="w-4 h-4 text-red-500" />
-                    </button>
-                    <select
-                      value={blog.status}
-                      onChange={(e) =>
-                        handleStatusChange(
-                          blog.id,
-                          e.target.value as BlogStatus
-                        )
-                      }
-                      className="rounded px-2 py-1 text-xs
-                        bg-white border border-gray-300
-                        dark:bg-zinc-900 dark:border-zinc-700"
+                  {/* Status */}
+                  <td className="px-4 py-3">
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-medium ${statusStyle(
+                        blog.status
+                      )}`}
                     >
-                      <option value="Published">Published</option>
-                      <option value="Draft">Draft</option>
-                    </select>
-                  </div>
+                      {blog.status}
+                    </span>
+                  </td>
+
+                  {/* Actions */}
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <button title="View">
+                        <Eye className="w-4 h-4 text-zinc-500 hover:text-white" />
+                      </button>
+                      <button title="Edit">
+                        <Pencil className="w-4 h-4 text-green-500" />
+                      </button>
+                      <button
+                        title="Delete"
+                        onClick={() => handleDelete(blog.id)}
+                      >
+                        <Trash2 className="w-4 h-4 text-red-500" />
+                      </button>
+
+                      <select
+                        value={blog.status}
+                        onChange={(e) =>
+                          handleStatusChange(
+                            blog.id,
+                            e.target.value as BlogStatus
+                          )
+                        }
+                        className="rounded px-2 py-1 text-xs
+                          bg-white border border-gray-300
+                          dark:bg-zinc-900 dark:border-zinc-700"
+                      >
+                        <option value="Published">Published</option>
+                        <option value="Draft">Draft</option>
+                      </select>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={7}
+                  className="px-4 py-6 text-center text-zinc-500"
+                >
+                  No blogs found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
 
