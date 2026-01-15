@@ -291,7 +291,7 @@ export default function CategoriesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 transition-colors">
-      <div className="max-w-7xl mx-auto p-6">
+      <div className="max-w-auto mx-auto p-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">

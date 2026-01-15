@@ -20,7 +20,7 @@ export default function deshbordLayout({
           <AppSidebar />
           <div className="flex flex-1 flex-col">          
             <HeaderWerapper />
-            <main className="flex-1 p-4 lg:p-6">
+            <main className="flex-1 p-4 lg:p-0 bg-gray-50 dark:bg-gray-900">
               {children}
             </main>
 
