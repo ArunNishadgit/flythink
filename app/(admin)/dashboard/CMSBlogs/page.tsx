@@ -83,7 +83,7 @@ const BlogsPage = () => {
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // 🔍 Search Filter
+
   const filteredBlogs = useMemo(() => {
     if (!searchTerm) return blogs;
 
@@ -95,7 +95,6 @@ const BlogsPage = () => {
     );
   }, [searchTerm, blogs]);
 
-  // 📄 Pagination (SAFE)
   const totalPages =
     entriesPerPage > 0
       ? Math.max(1, Math.ceil(filteredBlogs.length / entriesPerPage))
@@ -111,7 +110,6 @@ const BlogsPage = () => {
     if (page >= 1 && page <= totalPages) setCurrentPage(page);
   };
 
-  // 🎨 Status Badge
   const statusStyle = (status: BlogStatus) => {
     if (status === "Published")
       return "bg-green-500/20 text-green-500";
@@ -120,19 +118,25 @@ const BlogsPage = () => {
     return "bg-gray-500/20 text-gray-500";
   };
 
-  // 🔁 Change Status
+
   const handleStatusChange = (id: string, status: BlogStatus) => {
     setBlogs((prev) =>
       prev.map((b) => (b.id === id ? { ...b, status } : b))
     );
   };
 
-  // 🗑 Delete Blog (VERCEL SAFE)
+ 
   const handleDelete = (id: string) => {
-    if (typeof window === "undefined") return;
+    const confirmFn =
+      typeof globalThis !== "undefined" &&
+      typeof (globalThis as any).confirm === "function"
+        ? (globalThis as any).confirm
+        : null;
 
-    const ok = window.confirm("Are you sure you want to delete this blog?");
-    if (!ok) return;
+    if (confirmFn) {
+      const ok = confirmFn("Are you sure you want to delete this blog?");
+      if (!ok) return;
+    }
 
     setBlogs((prev) => prev.filter((b) => b.id !== id));
   };

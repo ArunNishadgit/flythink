@@ -9,6 +9,8 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // Provide a safe fallback during build so TypeScript doesn't error
+    // on undefined environment variables (Vercel build-time can omit secrets).
+    url: process.env["DATABASE_URL"] ?? "",
   },
 });
